@@ -1,0 +1,58 @@
+body {
+    background-image: -webkit-gradient(linear, right top, left top, from(#00c6bb), to(#39CCCC));
+    background-image: linear-gradient(-90deg, #00c6bb, #39CCCC);
+    color: #fff;
+    font-family: 'Montserrat',sans-serif;
+}
+form {
+    font-size: 1.5rem;
+    text-align: center;
+}
+.button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    background: transparent;
+    border: 1px solid #fff;
+    padding: 1rem 2rem;
+    margin: 1%;
+    cursor: pointer;
+    color: #fff;
+    width: 40%;
+    transition: all .2s ease-in-out;
+}
+.button:hover {
+    background: rgba(0, 0, 0, .3);
+}
+form input {
+    text-decoration: none;
+    border: none;
+    font-size: 1.1rem;
+    background: rgba(0, 0, 0, .1);
+    padding: 0.5rem;
+    color: #fff;
+}
+::placeholder {
+    color: #ebeaf2;
+}
+input:focus {
+    outline: none;
+}
+.arrow {
+    color: #ebeaf2;
+    position: fixed;
+    top: 3%;
+    left: 5%;
+    transition: all .1s ease-in-out;
+}
+.arrow:hover {
+    color: #fff;
+}
+.eye {
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+}
