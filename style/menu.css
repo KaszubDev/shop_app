@@ -11,6 +11,7 @@ body {
   margin-left: 24%;
   margin-top: 2%;
   border: 1px solid white;
+  clear: both;
 }
 
 h1 {
@@ -67,7 +68,7 @@ ul a {
   margin-left: 47.5%;
 }
 
-.logout, .register {
+.logout, .welcome {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 1.3rem;
@@ -79,6 +80,12 @@ ul a {
   color: #fff;
 }
 
+.welcome {
+  float: left;
+  cursor: default;
+  border: none;
+}
+
 .logout {
   float: right;
 }
@@ -87,7 +94,7 @@ button:focus {
   outline: none;
 }
 
-.logout:hover, .register:hover {
+.logout:hover {
   background: rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=menu.css.map */

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    //echo '<h1>Cześć '.$_SESSION['name'].' </h1>';
     if ((isset($_POST['email'])) && (isset($_POST['password'])))
     {
         require_once "connect.php";
@@ -23,6 +22,7 @@
                     if ($password == $row['haslo'])
                     {
                         $_SESSION['zalogowany'] = true;
+                        $_SESSION['name'] = $row['imie'];
                         $result->free_result();
                         header('Location: menu.php');
                     }
@@ -60,20 +60,25 @@
     <form class="container" method="post">
         <input minlength="4" maxlength="30" required type="email" id="email" name="email" placeholder="Podaj adres e-mail"/> <br/>
     
-        <input required style="margin-left: 7.5%;" minlength="6" maxlength="30" type="password" id="password" name="password" placeholder="Podaj hasło"/> 
-        <span class="eye" onclick="toggle()"> <i class="fas fa-eye-slash fa-1x"></i> </span>
+        <input required minlength="6" maxlength="30" type="password" id="password" name="password" placeholder="Podaj hasło"/> 
+        <span class="eye" onclick="toggle()"> <i id="eye" class="fas fa-eye fa-1x"></i> </span>
         <br/>
 
         <input class="btn" type="submit" value="Zaloguj się" />
     </form>
     <script>
         function toggle() {
+            let eye = document.getElementById("eye");
             let x = document.getElementById("password");
-            if (x.type === "password") {
-            x.type = "text";
-            } 
+            if (eye.classList.contains('fa-eye-slash')){
+                eye.classList.remove('fa-eye-slash');
+                eye.classList.add('fa-eye');
+                x.type = "password";
+            }
             else {
-            x.type = "password";
+                x.type = "text";
+                eye.classList.remove("fa-eye");
+                eye.classList.add("fa-eye-slash");
             }
         }
     </script>

@@ -55,4 +55,5 @@ input:focus {
     cursor: pointer;
     color: #fff;
     display: inline-block;
+    margin-left: .5%;
 }

@@ -7,6 +7,7 @@
         header('Location: login.php');
         exit();
     }
+    echo '<h2 class="welcome">Cześć '.$_SESSION['name'].'! </h2>';
 
 ?>
 
@@ -21,7 +22,6 @@
         <!-- <link rel="shortcut icon" type="image/png" href="favicon.ico"/> -->
     </head>
     <body>
-        <button class="register">Zarejestruj się</button>
         <button class="logout" onclick="location.href='logout.php'">Wyloguj się</button>
         <div class="container">
             <h1>menu</h1>

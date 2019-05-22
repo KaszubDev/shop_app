@@ -75,11 +75,11 @@
 
             <label for="password">Hasło</label> <br/>
             <input required minlength="6" maxlength="30" type="password" id="password" name="password" placeholder="Utwórz hasło" style="margin-left: 2%;"/>
-            <span class="eye" onclick="toggle()"> <i class="fas fa-eye-slash fa-1x"></i> </span><br/>
+            <span class="eye" onclick="toggle()"> <i id="eye" class="fas fa-eye fa-1x"></i> </span><br/>
 
             <label for="password_check">Powtórz hasło</label> <br/>
             <input required minlength="6" maxlength="30" type="password" id="password_check" name="password_check" placeholder="Powtórz hasło" style="margin-left: 2%;"/>
-            <span class="eye" onclick="toggle2()"> <i class="fas fa-eye-slash fa-1x"></i> </span><br/>
+            <span class="eye" onclick="toggle2()"> <i id="eye2" class="fas fa-eye fa-1x"></i> </span><br/>
             
             <br/>
             <input class="button" type="submit" value="Zarejestruj się" />
@@ -88,21 +88,31 @@
                         <!-- ZROBIĆ INNE IKONKI ZMIANA KLAS :) -->
     <script> 
         function toggle() {
+            let eye = document.getElementById("eye");
             let x = document.getElementById("password");
-            if (x.type === "password") {
-            x.type = "text";
-            } 
+            if (eye.classList.contains('fa-eye-slash')){
+                eye.classList.remove('fa-eye-slash');
+                eye.classList.add('fa-eye');
+                x.type = "password";
+            }
             else {
-            x.type = "password";
+                x.type = "text";
+                eye.classList.remove("fa-eye");
+                eye.classList.add("fa-eye-slash");
             }
         }
         function toggle2() {
+            let eye = document.getElementById("eye2");
             let x = document.getElementById("password_check");
-            if (x.type === "password") {
-            x.type = "text";
-            } 
+            if (eye.classList.contains('fa-eye-slash')){
+                eye.classList.remove('fa-eye-slash');
+                eye.classList.add('fa-eye');
+                x.type = "password";
+            }
             else {
-            x.type = "password";
+                x.type = "text";
+                eye.classList.remove("fa-eye");
+                eye.classList.add("fa-eye-slash");
             }
         }
     </script>

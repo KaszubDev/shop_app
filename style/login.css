@@ -65,6 +65,8 @@ button {
 }
 .eye {
     cursor: pointer;
-    margin-left: 2%;
     display: inline-block;
+    position: fixed;
+    margin-top: 2%;
+    margin-left: 1%;
 }
