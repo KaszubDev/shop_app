@@ -2,33 +2,104 @@
     session_start();
     if (isset($_POST['password'])) {
 
+        $register_valid = true;
+        //name
         $name = $_POST['name'];
+        if ((strlen($name)<3) || (strlen($name)>20)) 
+        {
+            $register_valid = false;
+        }
+        //surname
         $surname = $_POST['surname'];
+        if ((strlen($surname)<3) || (strlen($surname)>30)) 
+        {
+            $register_valid = false;
+        }
+        //email
         $email = $_POST['email'];
-        $tel = $_POST['tel'];
+        $email_sanitize = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        if ((strlen($email)<4) || (strlen($email)>30) || (filter_var($email, FILTER_VALIDATE_EMAIL)==false) || ($email != $email_sanitize)) 
+        {
+            $register_valid = false;
+        }
+        //telephone
+        if ((strlen($_POST['tel'])) > 0) {
+            $tel = $_POST['tel'];
+            $tel_sanitize = filter_var($tel, FILTER_SANITIZE_NUMBER_INT);
+            if ((strlen($tel)<9) || (strlen($tel)>20) || ($tel != $tel_sanitize)) 
+            {
+                $register_valid = false;
+            }
+        }
+        //city
         $city = $_POST['city'];
+        if ((strlen($city)<3) || (strlen($city)>20)) 
+        {
+            $register_valid = false;
+        }
+        //zip-code
         $zip_code = $_POST['zip-code'];
+        if ((strlen($zip_code)<3) || (strlen($zip_code)>20) || (!preg_match('/^[0-9]{2}-?[0-9]{3}$/Du', $zip_code))) 
+        {
+            $register_valid = false;
+        }
+        //street
         $street = $_POST['street'];
+        if ((strlen($street)<3) || (strlen($street)>20))
+        {
+            $register_valid = false;
+        }
+        //password
         $password = $_POST['password'];
         $password2 = $_POST['password_check'];
+        if ((strlen($password)<6) || (strlen($password)>30) || ($password != $password2))
+        {
+            $register_valid = false;
+        }
 
         $_SESSION['name'] = $name;
 
         require_once "connect.php";
         mysqli_report(MYSQLI_REPORT_STRICT);
-        $connection = new mysqli($host, $db_user, $db_password, $db_name);
-        $connection->query("SET NAMES 'utf8'");
 
-        if ($connection->query("INSERT INTO klienci VALUES (NULL, '$name', '$surname', '$tel', '$email', '$city', '$zip_code', '$street', '$password')"))
+        try
         {
-            header('Location: login.php');
-            $_SESSION['registered_successfully'] = true;
+            $connection = new mysqli($host, $db_user, $db_password, $db_name);
+            if ($connection->connect_errno!=0)
+            {
+                throw new Exception(mysqli_connect_errno());
+            }
+            else
+            {
+            $connection->query("SET NAMES 'utf8'");
+            //does this email already exists?
+            $result = $connection->query("SELECT ID_klienta from klienci WHERE email='$email'");
+            if (!$result) throw new Exception($connection->error);
+            if (($result->num_rows) > 0)
+            {
+                $register_valid = false;
+                echo '<h2 style="text-align: center;color: #ed2d2d;">Taki e-mail jest już zarejestrowany w bazie danych</h2>';
+            }
+            if ($register_valid == true)
+            {
+                if ($connection->query("INSERT INTO klienci VALUES (NULL, '$name', '$surname', '$tel', '$email', '$city', '$zip_code', '$street', '$password')"))
+                {
+                    $_SESSION['registered_successfully'] = true;
+                    header('Location: login.php');
+                }
+                else {
+                    throw new Exception($connection->error);
+                }
+            }
+            $connection->close();
         }
-        else {
-            header('Location: error.html');
-        }
-        $connection->close(); 
     }
+    catch(Exception $e)
+	{
+        header('Location: error.html');
+	}
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -36,7 +107,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Shop App - Rejestracja</title>
+    <title>Shop App - Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style/register.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -85,7 +156,6 @@
             <input class="button" type="submit" value="Zarejestruj się" />
         
     </form>
-                        <!-- ZROBIĆ INNE IKONKI ZMIANA KLAS :) -->
     <script> 
         function toggle() {
             let eye = document.getElementById("eye");

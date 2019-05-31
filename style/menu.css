@@ -12,6 +12,7 @@ body {
   margin-top: 2%;
   border: 1px solid white;
   clear: both;
+  min-height: 450px;
 }
 
 h1 {
@@ -46,7 +47,7 @@ ul a {
 }
 
 #lastLink {
-  padding-top: 15%;
+  margin-top: 15%;
   font-size: 1rem;
 }
 
@@ -82,7 +83,7 @@ ul a {
 
 .welcome {
   float: left;
-  cursor: default;
+  cursor: auto;
   border: none;
 }
 

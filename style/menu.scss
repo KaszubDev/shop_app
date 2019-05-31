@@ -11,6 +11,7 @@ body {
     margin-top: 2%;
     border: 1px solid white;
     clear: both;
+    min-height: 450px;
 }
 h1 {
     text-transform: uppercase;
@@ -39,7 +40,7 @@ ul {
     list-style-type: none;
 }
 #lastLink {
-    padding-top: 15%;
+    margin-top: 15%;
     font-size: 1rem;
 }
 .boundOne, .boundTwo, .boundThree, .boundFour {
@@ -70,7 +71,7 @@ ul {
 }
 .welcome {
     float: left;
-    cursor: default;
+    cursor: auto;
     border: none;
 }
 .logout {

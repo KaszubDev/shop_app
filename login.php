@@ -1,9 +1,20 @@
 <?php
     session_start();
+    if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+    {
+        header('Location: menu.php');
+        exit();
+    }
     if ((isset($_POST['email'])) && (isset($_POST['password'])))
     {
         require_once "connect.php";
         $connection = @new mysqli($host, $db_user, $db_password, $db_name);
+        $connection->query("SET NAMES 'utf8'");
+        if ($connection->connect_errno != 0)
+        {
+            echo "Error code: ".$connection->connect_errno;
+        }
+        else {
 
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -23,17 +34,22 @@
                     {
                         $_SESSION['zalogowany'] = true;
                         $_SESSION['name'] = $row['imie'];
+                        $_SESSION['clientID'] = $row['ID_klienta'];
                         $result->free_result();
                         header('Location: menu.php');
                     }
                     else 
                     {
-                        echo $password;
-                        echo $email;
+                        echo '<h3 style="text-align: center; color: #ed2d2d; margin-top: 2%;">Nieprawidłowe dane logowania. Spróbuj jeszcze raz.</h3>';
                     }
+                }
+                else
+                {
+                    echo '<h3 style="text-align: center; color: #ed2d2d; margin-top: 2%;">Nieprawidłowe dane logowania. Spróbuj jeszcze raz.</h3>';
                 } 
             }
-            $connection->close();
+        }
+        $connection->close();
     }
 ?>
 <!DOCTYPE html>
@@ -43,7 +59,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="style/login.css">
-    <title>Shop App - Logowanie</title>
+    <title>Shop App - Login</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
