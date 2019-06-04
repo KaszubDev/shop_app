@@ -22,21 +22,17 @@
             $allowed_image_extension = array(
                 "png",
                 "jpg",
-                "jpeg"
+                "jpeg",
+                "bmp"
             );
             $file_extension = pathinfo($_FILES["avatar"]["name"], PATHINFO_EXTENSION);
             $fileinfo = @getimagesize($_FILES["file-input"]["tmp_name"]);
-            list($width, $height) = getimagesize($_FILES["avatar"]["tmp_name"]);
-            
+            $width = $fileinfo[0];
+            $height = $fileinfo[1];
             if (!in_array($file_extension, $allowed_image_extension))
             {
                 $image_validation = false;
-                $error_message = 'Wybierz odpowiedni plik. Akceptowane rozszerzenia: .png .jpg .jpeg';
-            }
-            if (($width > "150" || $height > "150"))
-            {
-                $image_validation = false;
-                $error_message = 'Wybierz odpowiedni plik. Maksymalne wymiary obrazu to 150x150';
+                $error_message = 'Wybierz odpowiedni plik. Akceptowane rozszerzenia: .png .jpg .jpeg .bmp';
             }
         }
         else 
@@ -87,7 +83,7 @@
     </head>
     <body>
     <a href="employees.php" class="arrow"><i class="fas fa-long-arrow-alt-left fa-3x"></i></a>
-    <h1>Dodaj lub usuń pracownika</h1>
+    <h1>Dodaj pracownika</h1>
     <form class="container" method="post" enctype="multipart/form-data">
             <label for="employee_name">
                 <span>Imię</span>
@@ -117,8 +113,7 @@
                 <span>Avatar (opcjonalny)</span>
                 <input id="avatar" type="file" name="avatar"/>
             </label>
-            <input class="btn" type="submit" value="Dodaj" />
-            <input style="float:right;" class="btn" type="submit" value="Usuń" />
+            <input style="margin-left: 33%;" class="btn" type="submit" value="Dodaj" />
         </form>
         <?php
         if(isset($error_message))
@@ -132,6 +127,10 @@
             unset($message);
         }
         ?>
+
+
+        <!--KOD PONIŻEJ WYŚWIETLA AVATAR PO DODANIU PRACOWNIKA -->
+        <!-- 
         <?php
             try
             {
@@ -166,5 +165,6 @@
            header('Location: error.html');
         }
         ?>
+    -->
     </body>
 </html>

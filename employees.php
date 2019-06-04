@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Shop App - Employees</title>
+        <title>Shop App - Pracownicy</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style/employees.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -40,9 +40,13 @@
             if (!$result) throw new Exception($connection->error);
             if (($result->num_rows) > 0)
             {
+                echo "<table class = 'tab'>";
                 while($row = $result->fetch_assoc())
                 { 
-                echo "<h2>" . $row['imie'] . "</h2>" . $row['nazwisko'] ;
+                echo "<tr><td>";
+                echo '<img class = "avatar" src="data:image/jpeg;base64,'.base64_encode($row['avatar'] ).'" /></td>';
+                echo "<td><span class = 'imie'>" . $row['imie'] . " " . $row['nazwisko'] . "</span><br>" . $row['dzial'] . "<br>" . $row['stanowisko'] . "<br>" . $row['data_urodzenia'] . "</td><br></tr>";
+
                 }
                 echo "</table>";
             }
@@ -55,8 +59,8 @@
         }
     catch(Exception $e)
 	{
-       echo $e;
-       //header('Location: error.html');
+       //echo $e;
+       header('Location: error.html');
 	}
     ?>
     <?php
@@ -64,7 +68,16 @@
         {
             echo <<<END
             <a class="btn" href="add_employee.php">
-                <img src="assets/man.png"/>
+                <img src="assets/man+.png"/>
+            </a>
+            END;
+        }
+        if ((isset($_SESSION['clientID'])) && ($_SESSION['clientID']=='999'))
+        {
+            echo <<<END
+            <a class="btn2" href="delete_employee.php">
+                <img src="assets/man-.png"/>
+                <link rel="stylesheet" type="text/css" href="style/employees.css">
             </a>
             END;
         }

@@ -25,3 +25,62 @@
         <h1>Oferta</h1>
     </body>
 </html>
+
+<?php
+require_once "connect.php";
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        try
+        {
+            $connection = new mysqli($host, $db_user, $db_password, $db_name);
+            if ($connection->connect_errno!=0)
+            {
+                throw new Exception(mysqli_connect_errno());
+            }
+            else
+            {
+            $connection->query("SET NAMES 'utf8'");
+            $result = $connection->query("SELECT * from oferta");
+            if (!$result) throw new Exception($connection->error);
+            if (($result->num_rows) > 0)
+            {
+                while($row = $result->fetch_assoc())
+                { 
+                echo "<font size = '5'>" 
+                . "<h2>" . $row['producent'] . " "
+                . $row['model'] . "<br>" . "</h2>"
+                . $row['nazwa'] . "<br>" 
+                . "kategoria: " . $row['kategoria'] . "<br>" 
+                . "</font>";
+                }
+                echo "</table>";
+            }
+            else 
+            {
+                throw new Exception($connection->error);
+            }
+        }    
+            $connection->close();
+        }
+    catch(Exception $e)
+    {
+       echo $e;
+       //header('Location: error.html');
+    }
+        if ((isset($_SESSION['clientID'])) && ($_SESSION['clientID']=='999'))
+        {
+            echo <<<END
+            <a class="btn" href="chenge_offer.php">
+                <img src="assets/pc+.png"/>
+            </a>
+            END;
+        }
+        if ((isset($_SESSION['clientID'])) && ($_SESSION['clientID']=='999'))
+        {
+            echo <<<END
+            <a class="btn2" href="delete_offer.php">
+                <img src="assets/pc-.png"/>
+                <link rel="stylesheet" type="text/css" href="style/offer.css">
+            </a>
+            END;
+        }
+?>

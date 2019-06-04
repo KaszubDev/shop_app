@@ -51,7 +51,7 @@ ul a {
   font-size: 1rem;
 }
 
-.boundOne, .boundTwo, .boundThree, .boundFour {
+.boundOne, .boundTwo, .boundThree, .boundFour, .boundFive {
   height: 5px;
   background-color: #fff;
   width: 5%;
@@ -98,4 +98,3 @@ button:focus {
 .logout:hover {
   background: rgba(0, 0, 0, 0.2);
 }
-/*# sourceMappingURL=menu.css.map */

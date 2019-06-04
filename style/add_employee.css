@@ -1,6 +1,6 @@
 .arrow {
     color: #ebeaf2;
-    position: absolute;
+    position: fixed;
     top: 3%;
     left: 5%;
     transition: all .1s ease-in-out;
@@ -65,4 +65,7 @@ label span {
 }
 .btn:hover {
     background: rgba(0, 0, 0, .3);
+}
+td {
+    padding-right: 10%;
 }

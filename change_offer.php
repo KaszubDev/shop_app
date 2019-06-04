@@ -7,6 +7,42 @@
         header('Location: login.php');
         exit();
     }
+    if(isset($_POST['product_name'])) {
+
+        $product_name = $_POST['product_name'];
+        $model = $_POST['model'];
+        $producer = $_POST['producer'];
+        $category = $_POST['category'];
+    
+        require_once "connect.php";
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        try
+        {
+            $connection = new mysqli($host, $db_user, $db_password, $db_name);
+            if ($connection->connect_errno!=0)
+            {
+                throw new Exception(mysqli_connect_errno());
+            }
+            else
+            {
+            $connection->query("SET NAMES 'utf8'");
+            //if(true) {
+            if ($connection->query("INSERT INTO oferta VALUES (NULL, '$product_name', '$producer', '$model', '$category')"))
+            {
+                $message = 'Wysłano poprawnie.';
+            }
+            else {
+                throw new Exception($connection->error);
+            }
+            //}
+        }
+            $connection->close();
+    }
+    catch(Exception $e)
+    {
+       header('Location: error.html');
+    }
+}
 
 ?>
 
@@ -26,7 +62,7 @@
     <form class="container" method="post">
             <label for="product_name">
                 <span>Nazwa</span>
-                <input required id="product_name" type="text" name="name"/>
+                <input required id="product_name" type="text" name="product_name"/>
             </label>
             
             <label for="model">
@@ -46,5 +82,12 @@
             <input class="btn" type="submit" value="Dodaj produkt" />
             <input style="float:right;" class="btn" type="submit" value="Usuń produkt" />
         </form>
+        <?php
+            if (isset($message))
+            {
+                echo '<h2 style="text-align: center;">'.$message.'</h2>';
+                unset($message);
+            }
+        ?>
     </body>
 </html>

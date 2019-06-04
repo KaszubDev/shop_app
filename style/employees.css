@@ -10,9 +10,10 @@ h1 {
     text-align: center;
     margin-top: 2%;
 }
+
 .arrow {
     color: #ebeaf2;
-    position: absolute;
+    position: fixed;
     top: 3%;
     left: 5%;
     transition: all .1s ease-in-out;
@@ -21,8 +22,28 @@ h1 {
 .arrow:hover {
     color: #fff;
 }
-.btn {
+.btn2 {
     position: fixed;
     right: 2%;
     bottom: 2%;
+}
+.btn {
+    position: fixed;
+    right: 7%;
+    bottom: 2%;
+}
+.avatar {
+    max-height: 100px;
+    max-width: 100px;
+}
+.tab{
+    margin-left: 200px;
+}
+td{
+    padding-bottom: 20px;
+    padding-left: 10px;
+
+}
+.imie{
+    font-size: 30px;
 }

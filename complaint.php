@@ -39,7 +39,7 @@
             
             if ($validation == true)
             {
-            if ($connection->query("INSERT INTO reklamacje VALUES ('$date', '$model', '$description', '$id')"))
+            if ($connection->query("INSERT INTO reklamacje (data_zakupu, model, opis, ID_zamowienia) VALUES ('$date', '$model', '$description', '$id')"))
             {
                 $message = 'Wysłano poprawnie.';
             }
