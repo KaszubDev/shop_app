@@ -26,12 +26,17 @@
             );
             $file_extension = pathinfo($_FILES["avatar"]["name"], PATHINFO_EXTENSION);
             $fileinfo = @getimagesize($_FILES["file-input"]["tmp_name"]);
-            $width = $fileinfo[0];
-            $height = $fileinfo[1];
+            list($width, $height) = getimagesize($_FILES["avatar"]["tmp_name"]);
+            
             if (!in_array($file_extension, $allowed_image_extension))
             {
                 $image_validation = false;
                 $error_message = 'Wybierz odpowiedni plik. Akceptowane rozszerzenia: .png .jpg .jpeg';
+            }
+            if (($width > "150" || $height > "150"))
+            {
+                $image_validation = false;
+                $error_message = 'Wybierz odpowiedni plik. Maksymalne wymiary obrazu to 150x150';
             }
         }
         else 
@@ -75,7 +80,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Shop App - Main</title>
+        <title>Shop App - Add Employee</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style/add_employee.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
