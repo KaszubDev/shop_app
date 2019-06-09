@@ -14,10 +14,11 @@
         $bornDate = $_POST['bornDate'];
         $sector = $_POST['sector'];
         $position = $_POST['position'];
+        $image_validation = true;
         //upload avatar
-        if(isset($_FILES['avatar']))
+        if(!empty($_FILES['avatar']['name']))
         {
-            $image_validation = true;
+            
             $avatar = addslashes(file_get_contents($_FILES['avatar']['tmp_name']));
             $allowed_image_extension = array(
                 "png",

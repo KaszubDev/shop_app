@@ -69,8 +69,8 @@ require_once "connect.php";
         if ((isset($_SESSION['clientID'])) && ($_SESSION['clientID']=='999'))
         {
             echo <<<END
-            <a class="btn" href="chenge_offer.php">
-                <img src="assets/pc+.png"/>
+            <a class="btn" href="change_offer.php">
+                <img class="scale" src="assets/pc+.png"/>
             </a>
             END;
         }
@@ -78,7 +78,7 @@ require_once "connect.php";
         {
             echo <<<END
             <a class="btn2" href="delete_offer.php">
-                <img src="assets/pc-.png"/>
+                <img class="scale" src="assets/pc-.png"/>
                 <link rel="stylesheet" type="text/css" href="style/offer.css">
             </a>
             END;

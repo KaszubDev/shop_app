@@ -34,9 +34,7 @@
                 <?php
                     if ((isset($_SESSION['clientID'])) && ($_SESSION['clientID']=='999'))
                     {
-                        echo '<li id="lastLink"><a id="Four" class="link" href="change_offer.php">Zmień ofertę</a></li>';
-                
-                        echo '<li style="font-size: 1rem;"><a id="Five" class="link" href="check_complaints.php">Zobacz reklamacje</a></li>';
+                        echo '<li id="lastLink"><a id="Four" class="link" href="check_complaints.php">Zobacz reklamacje</a></li>';
                     }
                 ?>
             </ul>

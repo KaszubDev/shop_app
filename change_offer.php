@@ -57,8 +57,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     </head>
     <body>
-    <a href="index.php" class="arrow"><i class="fas fa-long-arrow-alt-left fa-3x"></i></a>
-    <h1>Zmień ofertę</h1>
+    <a href="offer.php" class="arrow"><i class="fas fa-long-arrow-alt-left fa-3x"></i></a>
+    <h1>Dodaj produkt</h1>
     <form class="container" method="post">
             <label for="product_name">
                 <span>Nazwa</span>
@@ -79,8 +79,9 @@
                 <span>Kategoria</span>
                 <input required id="category" type="text" name="category"/>
             </label>
+            <center>
             <input class="btn" type="submit" value="Dodaj produkt" />
-            <input style="float:right;" class="btn" type="submit" value="Usuń produkt" />
+            </center>
         </form>
         <?php
             if (isset($message))
