@@ -1,4 +1,4 @@
-​<?php
+<?php
     session_start();
     if (isset($_POST['password'])) {
 
@@ -83,6 +83,7 @@
             }
             if ($register_valid == true)
             {
+                if ((strlen($_POST['tel'])) > 0) {
                 if ($connection->query("INSERT INTO klienci VALUES (NULL, '$name', '$surname', '$tel', '$email', '$city', '$zip_code', '$street', '$password')"))
                 {
                     $_SESSION['registered_successfully'] = true;
@@ -90,6 +91,17 @@
                 }
                 else {
                     throw new Exception($connection->error);
+                }
+                }
+                if ((strlen($_POST['tel'])) == 0) {
+                    if ($connection->query("INSERT INTO klienci VALUES (NULL, '$name', '$surname', NULL, '$email', '$city', '$zip_code', '$street', '$password')"))
+                {
+                    $_SESSION['registered_successfully'] = true;
+                    header('Location: login.php');
+                }
+                else {
+                    throw new Exception($connection->error);
+                }
                 }
             }
             $connection->close();
